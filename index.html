@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="اطلاعات پرداخت امن برای تکمیل خرید در فروشگاه آنلاین">
+    <meta name="author" content="Hamid Yarali">
+    <title>اطلاعات پرداخت | فروشگاه آنلاین</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazir:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Vazir', sans-serif; 
+            background: #0f0f23;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+        }
+        
+        .copy-success {
+            animation: copyPulse 0.3s ease-in-out;
+        }
+        
+        @keyframes copyPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Accessibility Improvements */
+        .focus-visible:focus {
+            outline: 2px solid #a855f7;
+            outline-offset: 2px;
+        }
+
+        /* Enhanced Hover Effects */
+        .glass-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            .max-w-md {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+    <!-- Background -->
+    <div class="fixed inset-0 gradient-bg"></div>
+    <div class="fixed inset-0 opacity-30">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div class="absolute top-40 right-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-20 left-1/2 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style="animation-delay: 4s;"></div>
+    </div>
+
+    <div class="relative min-h-screen flex items-center justify-center p-6">
+        <div class="w-full max-w-md">
+            
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 glass rounded-2xl mb-4">
+                    <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-bold text-white mb-2">اطلاعات پرداخت</h1>
+                <p class="text-gray-300">برای تکمیل خرید، مبلغ را واریز کنید</p>
+            </div>
+
+            <!-- Payment Card -->
+            <div class="glass-card rounded-2xl p-6 mb-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-semibold text-purple-200">شماره کارت</h2>
+                    <div class="flex space-x-2 space-x-reverse">
+                        <div class="w-8 h-5 bg-red-500 rounded opacity-80"></div>
+                        <div class="w-8 h-5 bg-yellow-400 rounded opacity-80"></div>
+                    </div>
+                </div>
+                
+                <div class="glass rounded-xl p-4 mb-6">
+                    <div class="text-xl font-mono tracking-wider text-center text-white" id="cardNumber">
+                        6037-9919-1234-5678
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="text-sm text-gray-400 block mb-1">نام صاحب کارت</label>
+                        <div class="text-white font-medium" id="cardHolder">حمید یارعلی</div>
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-400 block mb-1">بانک</label>
+                        <div class="text-white font-medium">صادرات</div>
+                    </div>
+                </div>
+
+                <button onclick="copyCardNumber()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-medium py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 space-x-reverse focus-visible">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>کپی شماره کارت</span>
+                </button>
+            </div>
+
+            <!-- Instagram Contact -->
+            <div class="glass-card rounded-2xl p-6 mb-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center ml-3">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5c0 2.35 1.9 4.25 4.25 4.25h8.5c2.35 0 4.25-1.9 4.25-4.25v-8.5c0-2.35-1.9-4.25-4.25-4.25h-8.5zm9.25 2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zm-5 1.75c2.9 0 5.25 2.35 5.25 5.25S14.9 18 12 18s-5.25-2.35-5.25-5.25S9.1 7.5 12 7.5zm0 1.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-purple-200">ارتباط با پشتیبانی</h3>
+                        <p class="text-gray-400 text-sm">پس از واریز، رسید را ارسال کنید</p>
+                    </div>
+                </div>
+
+                <a href="https://www.instagram.com/hamidyaraliofficial?igsh=MWpxZjhhMHZuNnlpYQ==" target="_blank" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 space-x-reverse focus-visible">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5c0 2.35 1.9 4.25 4.25 4.25h8.5c2.35 0 4.25-1.9 4.25-4.25v-8.5c0-2.35-1.9-4.25-4.25-4.25h-8.5zm9.25 2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zm-5 1.75c2.9 0 5.25 2.35 5.25 5.25S14.9 18 12 18s-5.25-2.35-5.25-5.25S9.1 7.5 12 7.5zm0 1.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5z"/>
+                    </svg>
+                    <span>ارسال رسید در اینستاگرام (@HamidYaraliOfficial)</span>
+                </a>
+            </div>
+
+            <!-- Guidelines -->
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-lg font-semibold text-yellow-200 mb-4 flex items-center">
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    نکات مهم
+                </h3>
+                <ul class="space-y-3 text-gray-300">
+                    <li class="flex items-start">
+                        <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 ml-3 flex-shrink-0"></div>
+                        <span class="text-sm">پس از واریز، حتماً رسید را در اینستاگرام ارسال کنید</span>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 ml-3 flex-shrink-0"></div>
+                        <span class="text-sm">سفارش شما پس از تایید رسید پردازش می‌شود</span>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 ml-3 flex-shrink-0"></div>
+                        <span class="text-sm">در صورت عدم ارسال رسید، سفارش لغو خواهد شد</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center mt-8">
+                <div class="glass rounded-2xl p-6">
+                    <p class="text-gray-400 text-sm flex items-center justify-center mb-4">
+                        <svg class="w-4 h-4 text-green-400 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                        تمامی اطلاعات شما محفوظ و امن است
+                    </p>
+                    <p class="text-gray-400 text-sm mb-4">طراحی و توسعه توسط حمید یارعلی</p>
+                    <div class="flex justify-center space-x-6 space-x-reverse">
+                        <a href="https://github.com/HamidYaraliOfficial" target="_blank" class="text-purple-300 hover:text-purple-200 transition-all duration-300 flex items-center focus-visible">
+                            <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.66-.22.66-.48v-1.77c-2.78.61-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.46-1.1-1.46-.9-.61.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.564 9.564 0 0 1 12 6.8c.85 0 1.71.11 2.52.33 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.94.68 1.9v2.81c0 .27.16.58.67.49A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="https://www.instagram.com/hamidyaraliofficial?igsh=MWpxZjhhMHZuNnlpYQ==" target="_blank" class="text-purple-300 hover:text-purple-200 transition-all duration-300 flex items-center focus-visible">
+                            <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5c0 2.35 1.9 4.25 4.25 4.25h8.5c2.35 0 4.25-1.9 4.25-4.25v-8.5c0-2.35-1.9-4.25-4.25-4.25h-8.5zm9.25 2.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zm-5 1.75c2.9 0 5.25 2.35 5.25 5.25S14.9 18 12 18s-5.25-2.35-5.25-5.25S9.1 7.5 12 7.5zm0 1.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5z"/>
+                            </svg>
+                            Instagram
+                        </a>
+                    </div>
+                    <p class="text-gray-500 text-sm mt-4">© 2025 - طراحی و توسعه توسط حمید یارعلی</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="fixed top-4 right-4 glass text-white px-6 py-3 rounded-xl shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+        <div class="flex items-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>شماره کارت کپی شد!</span>
+        </div>
+    </div>
+
+    <script>
+        function copyCardNumber() {
+            const cardNumber = document.getElementById('cardNumber').textContent;
+            const cleanCardNumber = cardNumber.replace(/\s+/g, '').replace(/-/g, '');
+            
+            navigator.clipboard.writeText(cleanCardNumber).then(function() {
+                showSuccessToast();
+                
+                const button = event.target.closest('button');
+                button.classList.add('copy-success');
+                setTimeout(() => {
+                    button.classList.remove('copy-success');
+                }, 300);
+            }).catch(function(err) {
+                const textArea = document.createElement('textarea');
+                textArea.value = cleanCardNumber;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showSuccessToast();
+            });
+        }
+
+        function showSuccessToast() {
+            const toast = document.getElementById('successToast');
+            toast.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 8px 24px rgba(168, 85, 247, 0.2)';
+                    this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Accessibility enhancements
+            document.querySelectorAll('button, a').forEach(element => {
+                element.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+
+            // Show welcome notification
+            setTimeout(() => {
+                showSuccessToast('خوش آمدید به صفحه پرداخت!');
+            }, 1000);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'971afdc5d0d44d8d',t:'MTc1NTYyMDU2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
